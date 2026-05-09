@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaltrep · Data &amp; Digital Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg:         #090909;
+            --bg-card:    #0F0F0F;
+            --red:        #CC1A1A;
+            --red-light:  #E52525;
+            --red-dim:    rgba(204,26,26,0.12);
+            --white:      #F2F2F2;
+            --muted:      #808080;
+            --border:     rgba(204,26,26,0.22);
+            --border-sub: rgba(255,255,255,0.06);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* subtle grid texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9,9,9,0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-sub);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 36px;
+            width: 36px;
+            object-fit: contain;
+        }
+
+        .nav-brand-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 5rem;
+            z-index: 1;
+        }
+
+        /* red corner accent */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 80px; right: 0;
+            width: 3px;
+            height: 180px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+        }
+
+        .hero-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-wordmark {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(4.5rem, 13vw, 10rem);
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            line-height: 1;
+            color: var(--white);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 0.9s ease forwards 0.4s;
+        }
+
+        .hero-rule {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.8rem 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards 0.75s;
+        }
+
+        .hero-rule-line {
+            height: 1px;
+            width: 60px;
+            background: var(--red);
+        }
+
+        .hero-rule-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--red);
+            transform: rotate(45deg);
+        }
+
+        .hero-tagline {
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 500px;
+            letter-spacing: 0.03em;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1s;
+        }
+
+        .hero-parent {
+            margin-top: 2.8rem;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--muted);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.2s;
+        }
+
+        .hero-parent span { color: var(--red-light); }
+
+        .hero-cta {
+            margin-top: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.4s;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.8s;
+        }
+
+        .hero-scroll span {
+            font-size: 0.6rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 44px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+            animation: scrollPulse 2.2s ease infinite;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 7rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--red-light);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1.1;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-body {
+            font-size: 0.98rem;
+            color: var(--muted);
+            max-width: 620px;
+            line-height: 1.95;
+        }
+
+        /* ── SERVICES ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            margin-top: 3.5rem;
+            background: var(--border-sub);
+            border: 1px solid var(--border-sub);
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 2.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.5s ease;
+        }
+
+        .service-card:hover::before { width: 100%; }
+        .service-card:hover { background: #111111; }
+
+        .service-number {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--red-dim);
+            line-height: 1;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .service-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .tag {
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: 1px solid var(--border-sub);
+            padding: 0.3rem 0.75rem;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .service-card:hover .tag {
+            border-color: var(--border);
+            color: var(--white);
+        }
+
+        /* ── FULL DIVIDER ── */
+        .full-divider {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .full-divider::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+        }
+
+        /* ── APPROACH ── */
+        .approach-block {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .stat-stack { display: flex; flex-direction: column; gap: 1px; background: var(--border-sub); border: 1px solid var(--border-sub); }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--red);
+            transition: width 0.4s;
+        }
+
+        .stat-card:hover::after { width: 100%; }
+        .stat-card:hover { background: #111111; }
+
+        .stat-num {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--red-light);
+            display: block;
+            line-height: 1;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* ── CONTACT ── */
+        .contact-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            padding: 3.5rem;
+            border: 1px solid var(--border-sub);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-inner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--red);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background: var(--red); color: var(--white); }
+        .btn-primary:hover { background: var(--red-light); }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-sub);
+            color: var(--muted);
+        }
+
+        .btn-outline:hover { border-color: var(--red); color: var(--white); }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2.5rem 4rem;
+            border-top: 1px solid var(--border-sub);
+            color: var(--muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand img {
+            height: 24px;
+            width: 24px;
+            object-fit: contain;
+        }
+
+        .footer-brand span {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50%       { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.22s; }
+        .reveal-delay-3 { transition-delay: 0.34s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav { padding: 1.2rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            section { padding: 4.5rem 1.5rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .approach-block { grid-template-columns: 1fr; gap: 2.5rem; }
+            .stat-stack { flex-direction: row; }
+            .stat-card { flex: 1; }
+            .contact-inner { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; }
+            .contact-links { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .full-divider { padding: 0 1.5rem; }
+            .hero::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="data:image/jpeg;base64,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" alt="Kaltrep Logo">
+            <span class="nav-brand-name">Kaltrep</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <img class="hero-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABIAEgDASIAAhEBAxEB/8QAGwABAQEBAQEBAQAAAAAAAAAAAAUEBgMBAgj/xAA7EAABAwMBBgEHCQkAAAAAAAABAgMEAAUREgYTITFBUSIUIzJScZGzBxUXJzdhZXWhJSYzQmJkotHw/8QAGQEAAwEBAQAAAAAAAAAAAAAAAAIDBAEF/8QALBEAAgIBAgQDCQEBAAAAAAAAAQIAEQMhMQQSQYETUWFScZGhwcLR4fBysf/aAAwDAQACEQMRAD8A/jKlKUQilKr2tm3M2h+6yJCHZbLyW2YSmyUryCdalcsDHo9fZSs1CUxYjkarrr8P7beesXZmfIsqrilbIXlO7ilXnnUkKOpKfYkkDmQCQDUOugRJkv7LXGe6+4qSbnGVvc4Vq0PYIPTH6VguDzc+OZ6kBuUFhL+kYS6SCQvHQ8DnoefekRms3NfEYsPIpx2DV69dSOx02/jOpSlVmCKUpRCKUrtPkqibLS5dzVtMy48iPFL7aQVBISn0ydJyTjGB7aTI/hqWIuauC4U8XnXCGC31Og7zmU25bdtFwlkstOZTHSfSeI5kD1R1V34DjnGUOYjqa7rCvcD/ALrTe7i/dLk5LfXnPhbSEhKW0DglCUjgABwwKxV1brWTylA1Y9h18/X9f93l6IP3CuJ/Eo3w3qlNS93bpEPcsq3y0L3ikZWjTq4JPQHVxqvDH1e3M/icb4b1SVMxBbESEzdUsulCo26PhRgEL1cjk5GPupFqzfn9BNOYMExlfY+5hPSPb1y4DsmIS45HSVPs/wAyUeuO6R17c+XEYa94EuTAmNTIbymX2lakLTzB/wC6dasbWMRFxLXeosZMQ3Jpa3Y7f8NDiFlBKOyTjOnpnHKm5irUeskMS5MRddCu49LAsdyLHcdagUpSnmWK6DYtYQq8562mQP0Fc/Wu1TlwJKnEoS4hxtTTrauS0KGCM9Pb0pMi8ykCaOEyjFmVztPeBb0Ktr11mLKYraw0hCfSedIyEjsAOJPu4mpx744V0bwa+jslnVo+eTp1c8bnrUceTfMp8wvynyked3nh0afR045545zXFYmz6yufCqBVHs375VhfZ3c/zON8N6ueroYX2eXP8zjfDeqI2jMR5fqqSPfmuJu3v+gneJFpi/z9zTYu3tv2ZVzhq4MKS3KaVzQVZ0qB6pOD94P3YNbb+rOymzafVZkfGVX7sQSdi9otRwN5E44zjxrrJf77Ju0eBDcCUxLczuYqdI1BPDJURzJxS6s9eR+n7lj4eLAW2LoNPXn+Wi/E+W0ilKVeeXFKUohLrDof2JegtKCnmJwkrbz4t2W9OodwDz7ZrAE/sJS/7oD/ABNYkqUk5SSD3BqnaVxpMVy1SnRH3jgcZfUfClYBGF/0nPPoePLNTI5dZsXJ4xCnQ1X4myGfq+uQ/Eo3w3qywYSXNmLlOMqOgsvMpDKlecXnVxA7VuRDlx9lLlbnY7iZQukVG6xlRUW3sAAc89Mc+lYrihq2QV2vWl6Y4tKpRScoaKc4bBHNXE6jy6DqaQGyQPP8TS6cqozjQIR3JYDvfSX7Pa4aPksvFwduzDUiQ82ERVYClBtXDHHJzqPIY8Pu4mvpUVYyScDAya+VREKkkm7MycTxC5lxqq1yrW++pN/OKUpTzLFKUohFKUohL8Tau5xrEq1oDJVlIblFGXmkAKGhKugwogHmASBjNQKUpVRVuhvLZeIy5QodrrQRSlKaRilKUQn/2Q==" alt="Kaltrep">
+        <h1 class="hero-wordmark">Kaltrep</h1>
+        <div class="hero-rule">
+            <div class="hero-rule-line"></div>
+            <div class="hero-rule-dot"></div>
+            <div class="hero-rule-line"></div>
+        </div>
+        <p class="hero-tagline">Turning data into direction — and complexity into competitive advantage.</p>
+        <p class="hero-parent">A <span>Data Driven Investments</span> Company</p>
+        <div class="hero-cta">
+            <a href="#services" class="btn btn-primary">See What We Do</a>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <p class="section-label reveal">What We Do</p>
+        <h2 class="section-title reveal reveal-delay-1">Two disciplines.<br>One purpose.</h2>
+        <p class="section-body reveal reveal-delay-2">We help organizations make smarter decisions — whether evaluating an asset for acquisition or charting a course for digital transformation. Our work is grounded in operational experience, not theory.</p>
+        <div class="services-grid">
+            <div class="service-card reveal reveal-delay-2">
+                <div class="service-number">01</div>
+                <h3 class="service-title">Asset Evaluation</h3>
+                <p class="service-desc">We analyze acquisition targets through the lens of data maturity, digital capability, and operational efficiency — delivering clear, evidence-based assessments that support high-stakes investment decisions.</p>
+                <div class="service-tags">
+                    <span class="tag">Due Diligence</span>
+                    <span class="tag">Data Maturity</span>
+                    <span class="tag">Investment Analysis</span>
+                </div>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <div class="service-number">02</div>
+                <h3 class="service-title">Digital Consulting</h3>
+                <p class="service-desc">We partner with organizations to build practical digital transformation roadmaps — from data architecture and analytics strategy to platform modernization — grounded in real-world operational leadership.</p>
+                <div class="service-tags">
+                    <span class="tag">Data Strategy</span>
+                    <span class="tag">Lakehouse Architecture</span>
+                    <span class="tag">Roadmapping</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="full-divider"></div>
+
+    <!-- APPROACH -->
+    <section id="approach">
+        <div class="approach-block">
+            <div class="stat-stack">
+                <div class="stat-card reveal">
+                    <span class="stat-num">18+</span>
+                    <span class="stat-label">Years in data leadership</span>
+                </div>
+                <div class="stat-card reveal reveal-delay-1">
+                    <span class="stat-num">260K+</span>
+                    <span class="stat-label">Monthly integrations managed</span>
+                </div>
+                <div class="stat-card reveal reveal-delay-2">
+                    <span class="stat-num">40%</span>
+                    <span class="stat-label">Pipeline cost reduction delivered</span>
+                </div>
+            </div>
+            <div>
+                <p class="section-label reveal">Our Approach</p>
+                <h2 class="section-title reveal reveal-delay-1">Operators,<br>not just advisors.</h2>
+                <p class="section-body reveal reveal-delay-2">Our partners have led enterprise-scale data transformations, built modern Lakehouse architectures, and held accountability for analytics strategy across complex organizations. We bring the precision of engineers and the perspective of leaders who have sat in the seat.</p>
+                <p class="section-body reveal reveal-delay-3" style="margin-top: 1.2rem;">Every engagement delivers practical outcomes — clear, actionable roadmaps your team can execute, not slide decks that gather dust.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="full-divider"></div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-inner reveal">
+            <div class="contact-text">
+                <p class="section-label">Get in Touch</p>
+                <h2 class="section-title">Let's talk.</h2>
+                <p class="section-body">Whether you're evaluating an acquisition or looking to modernize your data operations, we'd welcome the conversation.</p>
+            </div>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/jeffreydsteele/" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
+                <a href="mailto:contact@kaltrep.com" class="btn btn-outline">Send an Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">
+            <img src="data:image/jpeg;base64,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" alt="Kaltrep">
+            <span>Kaltrep</span>
+        </div>
+        <p>A Data Driven Investments Company &nbsp;&middot;&nbsp; &copy; 2026</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
