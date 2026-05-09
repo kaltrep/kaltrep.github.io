@@ -467,6 +467,154 @@
 
         .btn-outline:hover { border-color: var(--red); color: var(--white); }
 
+        /* ── CASE STUDY ── */
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .work-industry {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: 1px solid var(--border-sub);
+            padding: 0.35rem 0.85rem;
+        }
+
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-sub);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--red);
+        }
+
+        .case-top {
+            padding: 2.8rem 2.8rem 2.2rem 3.2rem;
+            border-bottom: 1px solid var(--border-sub);
+        }
+
+        .case-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .case-summary {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.9;
+            max-width: 780px;
+        }
+
+        .case-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border-sub);
+        }
+
+        .case-col {
+            padding: 2.2rem 2.8rem 2.2rem 3.2rem;
+        }
+
+        .case-col:first-child {
+            border-right: 1px solid var(--border-sub);
+            padding-left: 3.2rem;
+        }
+
+        .case-col-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--red-light);
+            margin-bottom: 0.9rem;
+        }
+
+        .case-col p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .case-results {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--border-sub);
+        }
+
+        .result-item {
+            padding: 1.8rem 2rem;
+            text-align: center;
+            border-right: 1px solid var(--border-sub);
+            transition: background 0.3s;
+        }
+
+        .result-item:last-child { border-right: none; }
+        .result-item:hover { background: #111111; }
+
+        .result-num {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--red-light);
+            display: block;
+            line-height: 1;
+            letter-spacing: 0.05em;
+        }
+
+        .result-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 0.4rem;
+            display: block;
+        }
+
+        .case-footer {
+            padding: 1.5rem 2.8rem 1.5rem 3.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .case-footer-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        @media (max-width: 768px) {
+            .case-columns { grid-template-columns: 1fr; }
+            .case-col:first-child { border-right: none; border-bottom: 1px solid var(--border-sub); }
+            .case-results { grid-template-columns: repeat(2, 1fr); }
+            .result-item:nth-child(2) { border-right: none; }
+            .work-header { flex-direction: column; align-items: flex-start; }
+            .case-top, .case-col, .case-footer { padding-left: 2rem; }
+        }
+
         /* ── FOOTER ── */
         footer {
             position: relative;
@@ -556,6 +704,7 @@
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#approach">Approach</a></li>
+            <li><a href="#work">Work</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -633,6 +782,65 @@
                 <h2 class="section-title reveal reveal-delay-1">Operators,<br>not just advisors.</h2>
                 <p class="section-body reveal reveal-delay-2">Our partners have led enterprise-scale data transformations, built modern Lakehouse architectures, and held accountability for analytics strategy across complex organizations. We bring the precision of engineers and the perspective of leaders who have sat in the seat.</p>
                 <p class="section-body reveal reveal-delay-3" style="margin-top: 1.2rem;">Every engagement delivers practical outcomes — clear, actionable roadmaps your team can execute, not slide decks that gather dust.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="full-divider"></div>
+
+    <!-- WORK / CASE STUDY -->
+    <section id="work">
+        <div class="work-header">
+            <div>
+                <p class="section-label reveal">Recent Work</p>
+                <h2 class="section-title reveal reveal-delay-1">Delivering outcomes,<br>not just recommendations.</h2>
+            </div>
+            <span class="work-industry reveal">Financial Services &nbsp;·&nbsp; Insurance</span>
+        </div>
+
+        <div class="case-card reveal">
+            <div class="case-top">
+                <h3 class="case-title">Automating the Insurance Quote &amp; Renewal Workflow</h3>
+                <p class="case-summary">An insurance broker managing 120+ clients was spending significant time per engagement manually wrangling data from multiple sources, filling out individual forms for each of 8 insurance carriers, and sending them via separate emails — before a single quote could even be returned. Renewal notices were tracked and sent by hand. We rebuilt the entire workflow inside HubSpot.</p>
+            </div>
+
+            <div class="case-columns">
+                <div class="case-col">
+                    <p class="case-col-label">The Problem</p>
+                    <p>Each quote required a broker to aggregate client data from disparate sources into a spreadsheet, then manually transcribe that data into a unique form for every insurance provider — attached to individual emails sent one by one. Renewal reminders were manually managed, creating risk of missed notices. Client engagement at events was tracked informally with no structured follow-up.</p>
+                </div>
+                <div class="case-col">
+                    <p class="case-col-label">The Solution</p>
+                    <p>We implemented a full HubSpot CRM solution with custom event lead capture forms, automated post-event follow-up workflows, and a broker-facing quote intake form that simultaneously distributes to all 8 insurance providers via API integrations — eliminating redundant data entry entirely. A 30-day policy renewal automation was deployed to replace manual tracking, ensuring no client renewal goes unnoticed.</p>
+                </div>
+            </div>
+
+            <div class="case-results">
+                <div class="result-item">
+                    <span class="result-num">120+</span>
+                    <span class="result-label">Contacts Managed</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-num">8</span>
+                    <span class="result-label">Carriers Integrated</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-num">100%</span>
+                    <span class="result-label">Quote Submission Automated</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-num">0</span>
+                    <span class="result-label">Manual Renewal Notices</span>
+                </div>
+            </div>
+
+            <div class="case-footer">
+                <span class="case-footer-label">Built with</span>
+                <span class="tag">HubSpot CRM</span>
+                <span class="tag">API Integration</span>
+                <span class="tag">Workflow Automation</span>
+                <span class="tag">Custom Forms</span>
+                <span class="tag">Event Lead Capture</span>
             </div>
         </div>
     </section>
