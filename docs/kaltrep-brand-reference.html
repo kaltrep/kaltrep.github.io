@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaltrep Brand Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* ── Primary palette ── */
+  --abyss:    #0D1520;
+  --midnight: #1A2332;
+  --ice:      #63B3ED;
+  --ice-light:#7DC4F5;
+  --ice-dim:  rgba(99,179,237,0.12);
+  --glacier:  #8AA4BE;
+  --frost:    #EDF2F7;
+  --white:    #FFFFFF;
+
+  /* ── Semantic aliases ── */
+  --bg:          var(--abyss);
+  --bg-card:     var(--midnight);
+  --accent:      var(--ice);
+  --accent-hover:var(--ice-light);
+  --text-primary:var(--frost);
+  --text-muted:  var(--glacier);
+  --border:      rgba(99,179,237,0.22);
+  --border-sub:  rgba(255,255,255,0.07);
+
+  /* ── Typography ── */
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body:    'Outfit', sans-serif;
+  --font-label:   'Trebuchet MS', 'Arial', sans-serif;
+
+  /* ── Spacing scale ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--abyss);
+  color: var(--frost);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Layout ── */
+.page { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+
+/* ── Header ── */
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+.brand-header-text h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--frost);
+  text-transform: uppercase;
+}
+.brand-header-text p {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--glacier);
+  margin-top: 0.25rem;
+}
+.brand-header-badge {
+  margin-left: auto;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ice);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ── Section headings ── */
+.section { margin-bottom: 3.5rem; }
+.section-title {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ── Rule ── */
+.rule { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 3rem 0; }
+
+/* ── Color swatches ── */
+.swatch-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.swatch { border-radius: 8px; overflow: hidden; }
+.swatch-color { height: 64px; width: 100%; }
+.swatch-info { padding: 8px 0 4px; }
+.swatch-name { font-family: var(--font-display); font-size: 12px; font-weight: 700; color: var(--frost); }
+.swatch-hex  { font-family: 'Courier New', monospace; font-size: 11px; color: var(--glacier); margin-top: 2px; }
+.swatch-role { font-size: 10px; color: var(--glacier); opacity: 0.7; margin-top: 1px; letter-spacing: 0.04em; }
+
+/* ── Logo displays ── */
+.logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.logo-box {
+  border-radius: 10px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  gap: 10px;
+}
+.logo-box-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--glacier);
+  opacity: 0.7;
+}
+.logo-box-border { border: 1px solid var(--border-sub); }
+
+.icon-row { display: flex; gap: 16px; align-items: center; }
+.icon-box {
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Typography specimens ── */
+.type-stack { display: flex; flex-direction: column; gap: 16px; }
+.type-row {
+  background: var(--midnight);
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+.type-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--glacier); min-width: 120px; }
+.type-specimen { flex: 1; }
+
+/* ── Specs table ── */
+.specs-table { width: 100%; border-collapse: collapse; }
+.specs-table td {
+  padding: 10px 14px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-sub);
+  vertical-align: top;
+}
+.specs-table tr:last-child td { border-bottom: none; }
+.specs-table td:first-child {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ice);
+  white-space: nowrap;
+  width: 160px;
+}
+.specs-table td:last-child { color: var(--glacier); }
+.specs-table code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  background: rgba(99,179,237,0.08);
+  color: var(--ice-light);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.specs-table tr:hover td { background: rgba(99,179,237,0.03); }
+
+/* ── Button specimens ── */
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s;
+}
+.btn-primary { background: var(--ice); color: var(--abyss); }
+.btn-primary:hover { background: var(--ice-light); }
+.btn-outline { background: transparent; border: 1px solid var(--border-sub); color: var(--glacier); }
+.btn-outline:hover { border-color: var(--ice); color: var(--frost); }
+.btn-dark { background: var(--midnight); color: var(--frost); border: 1px solid var(--border); }
+
+/* ── Tag specimens ── */
+.tag-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--glacier);
+  border: 1px solid var(--border-sub);
+  padding: 0.3rem 0.8rem;
+}
+.tag-filled {
+  background: var(--midnight);
+  color: var(--frost);
+  border: 1px solid var(--border-sub);
+}
+.tag-accent {
+  background: var(--ice-dim);
+  color: var(--ice-light);
+  border: 1px solid var(--border);
+}
+
+/* ── Card specimens ── */
+.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.spec-card {
+  background: var(--midnight);
+  border: 1px solid var(--border-sub);
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--ice);
+}
+.spec-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--ice);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.spec-card:hover::after { transform: scaleX(1); }
+.card-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--ice-dim); line-height: 1; margin-bottom: 0.5rem; }
+.card-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--frost); margin-bottom: 0.5rem; }
+.card-body { font-size: 0.88rem; color: var(--glacier); }
+
+/* ── Stat card specimen ── */
+.stat-card {
+  background: var(--midnight);
+  border: 1px solid var(--border-sub);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--ice);
+  transition: width 0.4s;
+}
+.stat-card:hover::after { width: 100%; }
+.stat-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--ice); display: block; }
+.stat-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--glacier); margin-top: 0.4rem; display: block; }
+
+/* ── Usage rules ── */
+.rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rule-card { border-radius: 10px; padding: 18px 20px; font-size: 13px; line-height: 1.65; }
+.rule-card h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 10px; text-transform: uppercase; }
+.rule-do   { background: rgba(99,179,237,0.06); border: 1px solid rgba(99,179,237,0.2); }
+.rule-do h4 { color: var(--ice-light); }
+.rule-dont { background: rgba(255,100,100,0.04); border: 1px solid rgba(255,100,100,0.15); }
+.rule-dont h4 { color: #F87171; }
+.rule-card p { color: var(--glacier); }
+.rule-card ul { color: var(--glacier); padding-left: 1rem; }
+.rule-card li { margin-bottom: 4px; }
+
+/* ── Voice & tone ── */
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.voice-card {
+  background: var(--midnight);
+  border-radius: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--border-sub);
+}
+.voice-card h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--frost); margin-bottom: 8px; }
+.voice-card p { font-size: 12px; color: var(--glacier); line-height: 1.6; }
+.voice-card .voice-example {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(99,179,237,0.06);
+  border-left: 2px solid var(--ice);
+  font-size: 12px;
+  color: var(--frost);
+  font-style: italic;
+}
+
+/* ── Context blocks ── */
+.context-block {
+  background: var(--midnight);
+  border-radius: 10px;
+  padding: 20px 24px;
+  border: 1px solid var(--border-sub);
+  margin-bottom: 12px;
+}
+.context-block h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ice); margin-bottom: 10px; }
+.context-block p, .context-block li { font-size: 13px; color: var(--glacier); line-height: 1.7; }
+.context-block ul { padding-left: 1.2rem; }
+.context-block li { margin-bottom: 3px; }
+
+/* ── Inline code ── */
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  background: rgba(99,179,237,0.08);
+  color: var(--ice-light);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* ── Footer ── */
+.brand-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-sub);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-footer-left { display: flex; align-items: center; gap: 0.75rem; }
+.brand-footer-left span { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--frost); }
+.brand-footer p { font-size: 11px; color: var(--glacier); letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══════════════════════════════════════════════════════════ -->
+  <div class="brand-header">
+    <svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="6"  x2="10" y2="44" stroke="#EDF2F7" stroke-width="2.8" stroke-linecap="round"/>
+      <line x1="10" y1="25" x2="30" y2="6"  stroke="#EDF2F7" stroke-width="2.8" stroke-linecap="round"/>
+      <line x1="10" y1="25" x2="30" y2="44" stroke="#EDF2F7" stroke-width="2.8" stroke-linecap="round"/>
+      <circle cx="10" cy="6"  r="4" fill="#63B3ED"/>
+      <circle cx="10" cy="25" r="4" fill="#63B3ED"/>
+      <circle cx="10" cy="44" r="4" fill="#63B3ED"/>
+      <circle cx="30" cy="6"  r="4" fill="#63B3ED"/>
+      <circle cx="30" cy="44" r="4" fill="#63B3ED"/>
+    </svg>
+    <div class="brand-header-text">
+      <h1>Kaltrep</h1>
+      <p>Brand Reference · Technical Consulting</p>
+    </div>
+    <div class="brand-header-badge">Brand v1.0 · 2025</div>
+  </div>
+
+  <!-- ══ IDENTITY OVERVIEW ════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Identity Overview</div>
+    <div class="context-block">
+      <h4>Company</h4>
+      <p>Kaltrep is a three-person technical consulting firm specializing in <strong style="color:var(--frost)">Data Engineering, Data Science, Analytics, Business Process Optimization, and System Integrations</strong>. The team brings operational depth — they have held senior data leadership roles, built enterprise Lakehouse architectures, and managed large-scale pipeline infrastructure.</p>
+    </div>
+    <div class="context-block">
+      <h4>Positioning</h4>
+      <p>Operators, not just advisors. Kaltrep delivers practical outcomes — working systems, actionable roadmaps, and documented handoffs — not slide decks. They bridge the gap between executive strategy and technical execution. A subsidiary of Data Driven Investments.</p>
+    </div>
+    <div class="context-block">
+      <h4>Brand Personality</h4>
+      <ul>
+        <li>Precise and technically credible — never vague or buzzword-heavy</li>
+        <li>Confident without arrogance — the work speaks for itself</li>
+        <li>Warm but professional — approachable expertise, not cold consulting-speak</li>
+        <li>Premium and restrained — small firm that charges accordingly</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ COLOR SYSTEM ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Color System</div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0D1520;border:1px solid rgba(255,255,255,0.06)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Abyss</div>
+          <div class="swatch-hex">#0D1520</div>
+          <div class="swatch-role">Dark background</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A2332;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Midnight</div>
+          <div class="swatch-hex">#1A2332</div>
+          <div class="swatch-role">Primary / cards</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#63B3ED;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ice Blue</div>
+          <div class="swatch-hex">#63B3ED</div>
+          <div class="swatch-role">Accent — use sparingly</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#8AA4BE;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Glacier</div>
+          <div class="swatch-hex">#8AA4BE</div>
+          <div class="swatch-role">Secondary text / labels</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EDF2F7;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Frost</div>
+          <div class="swatch-hex">#EDF2F7</div>
+          <div class="swatch-role">Primary text / light bg</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <table class="specs-table" style="background:var(--midnight);border-radius:10px;overflow:hidden;">
+        <tr><td>Usage ratio</td><td>Abyss + Midnight carry ~70% of visual weight. Ice Blue is accent-only: node dots, rules, key highlight moments. Never use Ice Blue as a large fill.</td></tr>
+        <tr><td>Light alternative</td><td><code>#F0F4F9</code> "Cloud" — used as a light background alternative in documents and proposals. Paired with Midnight text.</td></tr>
+        <tr><td>Hover state</td><td><code>#243448</code> — card hover backgrounds. Slightly lighter than Midnight.</td></tr>
+        <tr><td>Ice dim</td><td><code>rgba(99,179,237,0.12)</code> — for ghosted large numerals (service card numbers, etc.)</td></tr>
+        <tr><td>Never use</td><td>Red, orange, or warm-toned accents. The prior brand used <code>#CC1A1A</code> red — this has been fully retired.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ LOGO & MARK ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Logo &amp; Mark</div>
+
+    <div class="logo-grid" style="margin-bottom: 12px;">
+      <div class="logo-box" style="background:#EDF2F7;">
+        <svg width="195" height="52" viewBox="0 0 195 52">
+          <line x1="9" y1="7"  x2="9"  y2="45" stroke="#1A2332" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="9" y1="26" x2="27" y2="7"  stroke="#1A2332" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="9" y1="26" x2="27" y2="45" stroke="#1A2332" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="9"  cy="7"  r="3.2" fill="#63B3ED"/>
+          <circle cx="9"  cy="26" r="3.2" fill="#63B3ED"/>
+          <circle cx="9"  cy="45" r="3.2" fill="#63B3ED"/>
+          <circle cx="27" cy="7"  r="3.2" fill="#63B3ED"/>
+          <circle cx="27" cy="45" r="3.2" fill="#63B3ED"/>
+          <text x="42" y="31" font-family="Georgia,serif" font-size="21" font-weight="700" fill="#1A2332" letter-spacing="3">KALTREP</text>
+          <text x="42" y="44" font-family="Trebuchet MS,sans-serif" font-size="6.5" fill="#8AA4BE" letter-spacing="3.5">TECHNICAL CONSULTING</text>
+        </svg>
+        <div class="logo-box-label">Light background</div>
+      </div>
+      <div class="logo-box" style="background:#0D1520; border:1px solid rgba(255,255,255,0.06);">
+        <svg width="195" height="52" viewBox="0 0 195 52">
+          <line x1="9" y1="7"  x2="9"  y2="45" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="9" y1="26" x2="27" y2="7"  stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="9" y1="26" x2="27" y2="45" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="9"  cy="7"  r="3.2" fill="#63B3ED"/>
+          <circle cx="9"  cy="26" r="3.2" fill="#63B3ED"/>
+          <circle cx="9"  cy="45" r="3.2" fill="#63B3ED"/>
+          <circle cx="27" cy="7"  r="3.2" fill="#63B3ED"/>
+          <circle cx="27" cy="45" r="3.2" fill="#63B3ED"/>
+          <text x="42" y="31" font-family="Georgia,serif" font-size="21" font-weight="700" fill="#EDF2F7" letter-spacing="3">KALTREP</text>
+          <text x="42" y="44" font-family="Trebuchet MS,sans-serif" font-size="6.5" fill="#8AA4BE" letter-spacing="3.5">TECHNICAL CONSULTING</text>
+        </svg>
+        <div class="logo-box-label" style="color:#4a6a88;">Dark background</div>
+      </div>
+    </div>
+
+    <div class="icon-row" style="margin-bottom: 1.5rem;">
+      <!-- Icon: rounded square dark -->
+      <div class="icon-box" style="background:#EDF2F7; flex:1;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="10" fill="#1A2332"/>
+          <line x1="14" y1="10" x2="14" y2="38" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="14" y1="24" x2="28" y2="10" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="14" y1="24" x2="28" y2="38" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="14" cy="10" r="3" fill="#63B3ED"/>
+          <circle cx="14" cy="24" r="3" fill="#63B3ED"/>
+          <circle cx="14" cy="38" r="3" fill="#63B3ED"/>
+          <circle cx="28" cy="10" r="3" fill="#63B3ED"/>
+          <circle cx="28" cy="38" r="3" fill="#63B3ED"/>
+        </svg>
+        <div class="logo-box-label" style="color:#8AA4BE;">Icon — sq dark</div>
+      </div>
+      <!-- Icon: circle -->
+      <div class="icon-box" style="background:#EDF2F7; flex:1;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="24" fill="#1A2332"/>
+          <line x1="14" y1="10" x2="14" y2="38" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="14" y1="24" x2="28" y2="10" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="14" y1="24" x2="28" y2="38" stroke="#EDF2F7" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="14" cy="10" r="3" fill="#63B3ED"/>
+          <circle cx="14" cy="24" r="3" fill="#63B3ED"/>
+          <circle cx="14" cy="38" r="3" fill="#63B3ED"/>
+          <circle cx="28" cy="10" r="3" fill="#63B3ED"/>
+          <circle cx="28" cy="38" r="3" fill="#63B3ED"/>
+        </svg>
+        <div class="logo-box-label" style="color:#8AA4BE;">Icon — circle</div>
+      </div>
+      <!-- Transparent mark on dark -->
+      <div class="icon-box" style="background:#1A2332; border:1px solid rgba(255,255,255,0.07); flex:1;">
+        <svg width="40" height="50" viewBox="0 0 40 50" fill="none">
+          <line x1="10" y1="5"  x2="10" y2="45" stroke="#EDF2F7" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="10" y1="25" x2="32" y2="5"  stroke="#EDF2F7" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="10" y1="25" x2="32" y2="45" stroke="#EDF2F7" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="10" cy="5"  r="3.5" fill="#63B3ED"/>
+          <circle cx="10" cy="25" r="3.5" fill="#63B3ED"/>
+          <circle cx="10" cy="45" r="3.5" fill="#63B3ED"/>
+          <circle cx="32" cy="5"  r="3.5" fill="#63B3ED"/>
+          <circle cx="32" cy="45" r="3.5" fill="#63B3ED"/>
+        </svg>
+        <div class="logo-box-label" style="color:#4a6a88;">Mark — transparent</div>
+      </div>
+      <!-- Favicon -->
+      <div class="icon-box" style="background:#EDF2F7; flex:1;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="6" fill="#1A2332"/>
+          <line x1="9"  y1="5"  x2="9"  y2="27" stroke="#EDF2F7" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9"  y1="16" x2="19" y2="5"  stroke="#EDF2F7" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9"  y1="16" x2="19" y2="27" stroke="#EDF2F7" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="9"  cy="5"  r="2.4" fill="#63B3ED"/>
+          <circle cx="9"  cy="16" r="2.4" fill="#63B3ED"/>
+          <circle cx="9"  cy="27" r="2.4" fill="#63B3ED"/>
+          <circle cx="19" cy="5"  r="2.4" fill="#63B3ED"/>
+          <circle cx="19" cy="27" r="2.4" fill="#63B3ED"/>
+        </svg>
+        <div class="logo-box-label" style="color:#8AA4BE;">Favicon 32px</div>
+      </div>
+    </div>
+
+    <table class="specs-table" style="background:var(--midnight);border-radius:10px;overflow:hidden;">
+      <tr><td>Mark concept</td><td>Five-node graph: three left nodes (top, mid, bottom) connected to two right nodes. A direct visual metaphor for data pipelines, system connections, and graph structures — not decorative, conceptually earned.</td></tr>
+      <tr><td>Node color</td><td>Always <code>#63B3ED</code> Ice Blue — never changes regardless of background.</td></tr>
+      <tr><td>Line color</td><td><code>#EDF2F7</code> Frost on dark backgrounds · <code>#1A2332</code> Midnight on light backgrounds.</td></tr>
+      <tr><td>Wordmark font</td><td>Georgia serif, bold, letter-spacing +3–4px. All caps. No italic.</td></tr>
+      <tr><td>Tagline</td><td>"TECHNICAL CONSULTING" — Trebuchet MS, ~7px, +3.5px letter-spacing. Optional; omit below 120px wide.</td></tr>
+      <tr><td>Clear space</td><td>Maintain clear space equal to the height of the "K" on all sides.</td></tr>
+      <tr><td>Min width</td><td>120px for horizontal lockup · 32px for icon mark.</td></tr>
+      <tr><td>Backgrounds</td><td>Use on: Abyss, Midnight, Frost, White, Cloud (<code>#F0F4F9</code>). Never on photographic backgrounds or colored fills.</td></tr>
+      <tr><td>Never do</td><td>Recolor nodes · stretch or distort · add drop shadows · outline the mark · use on busy backgrounds.</td></tr>
+    </table>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ TYPOGRAPHY ═════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Typography</div>
+    <div class="type-stack">
+      <div class="type-row">
+        <div class="type-label">Display / H1</div>
+        <div class="type-specimen" style="font-family:'Georgia',serif;font-size:2.2rem;font-weight:700;letter-spacing:0.5px;line-height:1.1;color:var(--frost);">Data that moves business</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Heading / H2</div>
+        <div class="type-specimen" style="font-family:'Georgia',serif;font-size:1.6rem;font-weight:700;letter-spacing:0.3px;color:var(--frost);">Operators, not just advisors.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Subheading / H3</div>
+        <div class="type-specimen" style="font-family:'Georgia',serif;font-size:1.1rem;font-weight:700;color:var(--frost);">Asset Evaluation</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Section Label</div>
+        <div class="type-specimen" style="font-family:'Trebuchet MS',sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--ice-light);">What We Do</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Body</div>
+        <div class="type-specimen" style="font-family:'Outfit',sans-serif;font-size:0.98rem;font-weight:300;color:var(--glacier);line-height:1.9;">We design and build the systems that turn raw data into decisions — pipelines, models, dashboards, and integrations that last.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Caption / Micro</div>
+        <div class="type-specimen" style="font-family:'Trebuchet MS',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--glacier);">Years in data leadership</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <table class="specs-table" style="background:var(--midnight);border-radius:10px;overflow:hidden;">
+        <tr><td>Display / headings</td><td>Georgia, Times New Roman — serif. Bold (700). Used for all H1–H3, wordmark, stat numbers, and card titles.</td></tr>
+        <tr><td>Body / UI</td><td>Outfit (Google Fonts) — 300 light weight for body, 400/500 for UI elements. Fallback: sans-serif.</td></tr>
+        <tr><td>Labels / caps</td><td>Trebuchet MS — used for section labels, tags, metadata. Always uppercase with generous letter-spacing (0.12–0.3em).</td></tr>
+        <tr><td>Monospace</td><td>Courier New — for code snippets, hex values, reference numbers.</td></tr>
+        <tr><td>Never use</td><td>Inter, Roboto, Arial, or system-ui as the primary display font. These read as generic.</td></tr>
+        <tr><td>Heading style</td><td>No text-transform uppercase on Georgia headings. Use sentence case or title case, not ALL CAPS (except wordmark and labels).</td></tr>
+        <tr><td>Line height</td><td>1.1 for display · 1.5–1.7 for headings · 1.85–2.0 for body text.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ COMPONENTS ═════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">UI Components</div>
+
+    <!-- Buttons -->
+    <div style="background:var(--midnight);border-radius:10px;padding:20px 24px;margin-bottom:12px;">
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:14px;">Buttons</div>
+      <div class="btn-row">
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-outline">Secondary Action</button>
+        <button class="btn btn-dark">Tertiary / Nav</button>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--glacier);line-height:1.7;">
+        Primary: Ice Blue bg, Abyss text — for main CTAs (1 per screen max). &nbsp;|&nbsp;
+        Outline: transparent bg, Glacier text, border — for secondary actions. &nbsp;|&nbsp;
+        Font: Georgia bold, 0.12em letter-spacing, uppercase, 0.8rem.
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div style="background:var(--midnight);border-radius:10px;padding:20px 24px;margin-bottom:12px;">
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:14px;">Tags &amp; Badges</div>
+      <div class="tag-row">
+        <span class="tag">Data Engineering</span>
+        <span class="tag">Analytics</span>
+        <span class="tag-filled">System Integration</span>
+        <span class="tag-accent">Ice Accent</span>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--glacier);line-height:1.7;">
+        Default tag: muted border, glacier text, no fill. &nbsp;|&nbsp; Filled: Midnight bg. &nbsp;|&nbsp; Accent: ice-dim bg, ice-light text. Font: Trebuchet MS 0.62rem, uppercase, 0.12em spacing.
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div style="margin-bottom:12px;">
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:10px;">Service / Content Cards</div>
+      <div class="card-row">
+        <div class="spec-card">
+          <div class="card-num">01</div>
+          <div class="card-title">Data Engineering</div>
+          <div class="card-body">Pipeline architecture, ETL/ELT, cloud data warehouse, real-time streaming, data quality frameworks.</div>
+          <div class="tag-row" style="margin-top:12px;">
+            <span class="tag">Pipelines</span>
+            <span class="tag">ETL/ELT</span>
+          </div>
+        </div>
+        <div class="spec-card">
+          <div class="card-num">02</div>
+          <div class="card-title">Analytics &amp; BI</div>
+          <div class="card-body">Statistical modeling, machine learning, executive dashboards, KPI tracking, self-serve analytics tooling.</div>
+          <div class="tag-row" style="margin-top:12px;">
+            <span class="tag">Dashboards</span>
+            <span class="tag">ML</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--glacier);">Left ice border (3px) · top ice rule on hover · Midnight bg · Ghost large number in ice-dim</div>
+    </div>
+
+    <!-- Stat cards -->
+    <div>
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:10px;">Stat Cards</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border-sub);border:1px solid var(--border-sub);">
+        <div class="stat-card"><span class="stat-num">18+</span><span class="stat-label">Years in data leadership</span></div>
+        <div class="stat-card"><span class="stat-num">260K+</span><span class="stat-label">Monthly integrations managed</span></div>
+        <div class="stat-card"><span class="stat-num">40%</span><span class="stat-label">Pipeline cost reduction</span></div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--glacier);">Bottom ice rule on hover · Midnight bg · Georgia serif number in Ice Blue · Trebuchet MS label in Glacier</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ VOICE & TONE ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Voice &amp; Tone</div>
+    <div class="voice-grid">
+      <div class="voice-card">
+        <h4>Precise</h4>
+        <p>Name the technology, the outcome, the metric. No hand-waving. Specificity signals expertise.</p>
+        <div class="voice-example">"We cut pipeline costs 40% by migrating to a Lakehouse architecture on Databricks."</div>
+      </div>
+      <div class="voice-card">
+        <h4>Direct</h4>
+        <p>Short sentences. Active voice. Lead with the outcome, not the process. Business decision-makers read fast.</p>
+        <div class="voice-example">"We rebuild workflows, not just recommend them."</div>
+      </div>
+      <div class="voice-card">
+        <h4>Confident</h4>
+        <p>No hedging. No "we believe" or "we hope to." State what you do and what clients get.</p>
+        <div class="voice-example">"Every engagement ships with runbooks, documentation, and a 30-day support window."</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <table class="specs-table" style="background:var(--midnight);border-radius:10px;overflow:hidden;">
+        <tr><td>Tagline</td><td>"Connecting data. Driving decisions." — use in footers, signatures, closing slides.</td></tr>
+        <tr><td>Hero tagline (web)</td><td>"Turning data into direction — and complexity into competitive advantage."</td></tr>
+        <tr><td>Closing CTA</td><td>"Let's build something exceptional together." — use on closing slides and contact sections.</td></tr>
+        <tr><td>Avoid</td><td>"Synergy", "leverage", "holistic", "best-in-class", "world-class", "cutting-edge", "robust solution". Use specific verbs: build, ship, reduce, automate, connect, design, measure.</td></tr>
+        <tr><td>Tone in proposals</td><td>Professional but not stiff. Write like a senior engineer who also understands the business — not like a management consultant.</td></tr>
+        <tr><td>Numbers</td><td>Lead with numbers where possible: "18+ years", "260K+ integrations/month", "40% cost reduction". Specificity builds trust.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ DOCUMENT STANDARDS ═════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Document &amp; Slide Standards</div>
+
+    <div class="context-block">
+      <h4>PowerPoint / Slide Decks</h4>
+      <ul>
+        <li>Background: Abyss <code>#0D1520</code> (dark slides) or Frost <code>#EDF2F7</code> / Cloud <code>#F0F4F9</code> (light slides)</li>
+        <li>Headings: Georgia bold, Frost on dark / Midnight on light</li>
+        <li>Section labels: Trebuchet MS, Ice Blue, uppercase, 9pt, 6pt letter-spacing</li>
+        <li>Body: Calibri 13–14pt, Glacier color</li>
+        <li>Accent lines &amp; rules: Ice Blue, 1.5–2pt weight</li>
+        <li>Service/stat cards: Abyss card on dark slides · Midnight card on light slides, Ice Blue top border</li>
+        <li>Ghost mark: Large K-graph mark at low opacity (ICE, 78% transparent) used as background decoration on cover and closing slides</li>
+        <li>Cover structure: Section label → Title (40pt Georgia bold) → Ice rule → Client/date</li>
+      </ul>
+    </div>
+
+    <div class="context-block">
+      <h4>Word / Proposal Documents</h4>
+      <ul>
+        <li>Header: "KALTREP" Georgia bold left · "Technical Consulting" Calibri right · Ice Blue bottom rule</li>
+        <li>Footer: "Confidential — Kaltrep Technical Consulting" left · page number right · light top rule</li>
+        <li>H1: Georgia bold 40pt, Midnight, Ice Blue bottom border</li>
+        <li>H2: Georgia bold 28pt, Midnight</li>
+        <li>H3: Trebuchet MS bold 22pt, Ice Blue — used for phase labels</li>
+        <li>Table headers: Midnight bg, Frost bold text, Trebuchet MS</li>
+        <li>Alternating rows: <code>#F0F4F9</code> Cloud fill</li>
+        <li>Cover block: Full-width Midnight rectangle, Frost wordmark, ICE rule below</li>
+        <li>Signature lines: Midnight underline (client) · Ice Blue underline (Kaltrep rep)</li>
+        <li>Fonts available in Office: Georgia, Calibri, Trebuchet MS — no installation required</li>
+      </ul>
+    </div>
+
+    <div class="context-block">
+      <h4>Email Signature</h4>
+      <ul>
+        <li>Name: Outfit 500 or Calibri bold, Midnight</li>
+        <li>Title: Trebuchet MS, Ice Blue, small caps or uppercase</li>
+        <li>Divider: 1px, <code>#D0DCE8</code></li>
+        <li>Contact info: Calibri, Glacier</li>
+        <li>Logo: Small SVG horizontal lockup (dark text version), ~100px wide</li>
+        <li>No banner image, no marketing tagline in signatures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ USAGE RULES ════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">Usage Rules</div>
+    <div class="rule-grid">
+      <div class="rule-card rule-do">
+        <h4>✓ Do</h4>
+        <ul>
+          <li>Use Ice Blue only for accent moments: logo nodes, horizontal rules, hover states, key numbers</li>
+          <li>Use Georgia for all display headings and wordmarks</li>
+          <li>Use Midnight + Frost as the dominant pairing</li>
+          <li>Keep the K-graph nodes always Ice Blue regardless of context</li>
+          <li>Use solid color backgrounds only (no gradients as primary bg)</li>
+          <li>Lead copy with specific, verifiable outcomes and metrics</li>
+          <li>Use letter-spacing generously on labels and caps text</li>
+          <li>Keep the Outfit font at weight 300 for body text</li>
+        </ul>
+      </div>
+      <div class="rule-card rule-dont">
+        <h4>✗ Don't</h4>
+        <ul>
+          <li>Use red, orange, or warm accents — the prior red brand is retired</li>
+          <li>Use Inter, Roboto, or system-ui as a primary display font</li>
+          <li>Use Ice Blue as a large background fill</li>
+          <li>Recolor or distort the K-graph mark</li>
+          <li>Place the logo on photographic or patterned backgrounds</li>
+          <li>Use buzzwords: synergy, leverage, holistic, cutting-edge</li>
+          <li>Use purple gradients or other generic AI-adjacent aesthetics</li>
+          <li>Mix Rajdhani (the previous font) into any new materials</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ══ CSS VARIABLES REFERENCE ════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">CSS Variables &amp; Code Reference</div>
+    <div style="background:var(--midnight);border-radius:10px;padding:20px 24px;">
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:14px;">Drop this :root block into any web project</div>
+      <pre style="font-family:'Courier New',monospace;font-size:12px;color:var(--glacier);line-height:1.9;overflow-x:auto;"><span style="color:#63B3ED">:root</span> {
+  <span style="color:#8AA4BE">/* ── Core palette ── */</span>
+  <span style="color:#7DC4F5">--abyss</span>:    <span style="color:#EDF2F7">#0D1520</span>;   <span style="color:#4a6a88">/* Dark bg */</span>
+  <span style="color:#7DC4F5">--midnight</span>: <span style="color:#EDF2F7">#1A2332</span>;   <span style="color:#4a6a88">/* Card bg / primary dark */</span>
+  <span style="color:#7DC4F5">--ice</span>:      <span style="color:#EDF2F7">#63B3ED</span>;   <span style="color:#4a6a88">/* Accent — use sparingly */</span>
+  <span style="color:#7DC4F5">--ice-light</span>:<span style="color:#EDF2F7">#7DC4F5</span>;   <span style="color:#4a6a88">/* Hover / lighter accent */</span>
+  <span style="color:#7DC4F5">--ice-dim</span>:  <span style="color:#EDF2F7">rgba(99,179,237,0.12)</span>; <span style="color:#4a6a88">/* Ghost numbers */</span>
+  <span style="color:#7DC4F5">--glacier</span>:  <span style="color:#EDF2F7">#8AA4BE</span>;   <span style="color:#4a6a88">/* Secondary text */</span>
+  <span style="color:#7DC4F5">--frost</span>:    <span style="color:#EDF2F7">#EDF2F7</span>;   <span style="color:#4a6a88">/* Primary text / light bg */</span>
+
+  <span style="color:#8AA4BE">/* ── Semantic ── */</span>
+  <span style="color:#7DC4F5">--bg</span>:           <span style="color:#EDF2F7">var(--abyss)</span>;
+  <span style="color:#7DC4F5">--bg-card</span>:      <span style="color:#EDF2F7">var(--midnight)</span>;
+  <span style="color:#7DC4F5">--bg-hover</span>:     <span style="color:#EDF2F7">#243448</span>;
+  <span style="color:#7DC4F5">--accent</span>:       <span style="color:#EDF2F7">var(--ice)</span>;
+  <span style="color:#7DC4F5">--text-primary</span>: <span style="color:#EDF2F7">var(--frost)</span>;
+  <span style="color:#7DC4F5">--text-muted</span>:   <span style="color:#EDF2F7">var(--glacier)</span>;
+  <span style="color:#7DC4F5">--border</span>:       <span style="color:#EDF2F7">rgba(99,179,237,0.22)</span>;
+  <span style="color:#7DC4F5">--border-sub</span>:   <span style="color:#EDF2F7">rgba(255,255,255,0.07)</span>;
+
+  <span style="color:#8AA4BE">/* ── Typography ── */</span>
+  <span style="color:#7DC4F5">--font-display</span>: <span style="color:#EDF2F7">'Georgia', 'Times New Roman', serif</span>;
+  <span style="color:#7DC4F5">--font-body</span>:    <span style="color:#EDF2F7">'Outfit', sans-serif</span>;
+  <span style="color:#7DC4F5">--font-label</span>:   <span style="color:#EDF2F7">'Trebuchet MS', 'Arial', sans-serif</span>;
+  <span style="color:#7DC4F5">--font-mono</span>:    <span style="color:#EDF2F7">'Courier New', monospace</span>;
+}</pre>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+  <div class="brand-footer">
+    <div class="brand-footer-left">
+      <svg width="18" height="24" viewBox="0 0 18 24" fill="none">
+        <line x1="5" y1="3" x2="5" y2="21" stroke="#EDF2F7" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="5" y1="12" x2="14" y2="3" stroke="#EDF2F7" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="5" y1="12" x2="14" y2="21" stroke="#EDF2F7" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="5"  cy="3"  r="2" fill="#63B3ED"/>
+        <circle cx="5"  cy="12" r="2" fill="#63B3ED"/>
+        <circle cx="5"  cy="21" r="2" fill="#63B3ED"/>
+        <circle cx="14" cy="3"  r="2" fill="#63B3ED"/>
+        <circle cx="14" cy="21" r="2" fill="#63B3ED"/>
+      </svg>
+      <span>Kaltrep</span>
+    </div>
+    <p>Brand Reference Document · kaltrep.com · contact@kaltrep.com</p>
+  </div>
+
+</div>
+</body>
+</html>
