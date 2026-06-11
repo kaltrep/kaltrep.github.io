@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Steele · Kaltrep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:         #0D1520;
+  --bg-card:    #1A2332;
+  --ice:        #63B3ED;
+  --ice-light:  #7DC4F5;
+  --ice-dim:    rgba(99,179,237,0.12);
+  --white:      #EDF2F7;
+  --muted:      #8AA4BE;
+  --border:     rgba(99,179,237,0.22);
+  --border-sub: rgba(255,255,255,0.07);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(13,21,32,0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-sub);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+}
+
+.nav-brand-name {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--white); }
+.nav-links a.active::after { width: 100%; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  z-index: 1;
+  padding: 9rem 4rem 5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  top: 80px; right: 4rem;
+  width: 3px;
+  height: 140px;
+  background: linear-gradient(to bottom, var(--ice), transparent);
+}
+
+.page-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ice-light);
+  margin-bottom: 0.9rem;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.2s;
+}
+
+.page-name {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--white);
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.page-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.6rem 0;
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards 0.75s;
+}
+
+.page-rule-line {
+  height: 1px;
+  width: 50px;
+  background: var(--ice);
+}
+
+.page-rule-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--ice);
+  transform: rotate(45deg);
+}
+
+.page-title-line {
+  font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.95s;
+}
+
+/* ── FULL DIVIDER ── */
+.full-divider {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.full-divider::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+
+/* ── SHARED SECTION WRAPPER ── */
+.about-section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ice-light);
+  margin-bottom: 1rem;
+}
+
+/* ── PROFILE BLOCK ── */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.profile-photo-col {
+  position: sticky;
+  top: 6rem;
+}
+
+.profile-photo {
+  width: 100%;
+  display: block;
+  filter: grayscale(15%) contrast(1.05);
+  border-left: 3px solid var(--ice);
+}
+
+.profile-photo-caption {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.profile-bio-col { }
+
+.profile-bio-col p {
+  font-size: 0.97rem;
+  color: var(--muted);
+  line-height: 2.0;
+  margin-bottom: 1.6rem;
+}
+
+.profile-bio-col p:last-child { margin-bottom: 0; }
+
+.bio-highlight {
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* ── STATS ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-sub);
+  border: 1px solid var(--border-sub);
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--ice);
+  transition: width 0.4s;
+}
+
+.stat-card:hover::after { width: 100%; }
+.stat-card:hover { background: #243448; }
+
+.stat-num {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--ice);
+  display: block;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  display: block;
+  line-height: 1.5;
+}
+
+/* ── EXPERTISE ── */
+.expertise-groups {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border-sub);
+  border: 1px solid var(--border-sub);
+}
+
+.expertise-group {
+  background: var(--bg-card);
+  padding: 2rem 2.4rem;
+}
+
+.expertise-group-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.expertise-group-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-sub);
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border-sub);
+  padding: 0.3rem 0.75rem;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  border-color: var(--border);
+  color: var(--white);
+}
+
+/* ── CTA ── */
+.cta-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-sub);
+  padding: 3rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--ice);
+}
+
+.cta-text h3 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.cta-text p {
+  font-size: 0.93rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-primary { background: var(--ice); color: #0D1520; }
+.btn-primary:hover { background: var(--ice-light); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2.5rem 4rem;
+  border-top: 1px solid var(--border-sub);
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand span {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .profile-photo-col {
+    position: static;
+    max-width: 300px;
+  }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .expertise-groups { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .page-header { padding: 8rem 1.5rem 4rem; }
+  .page-header::after { display: none; }
+  .about-section { padding: 4rem 1.5rem; }
+  .full-divider { padding: 0 1.5rem; }
+  .cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5rem 1.5rem 2.5rem 2rem;
+    gap: 2rem;
+  }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  footer { padding: 2.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <svg width="26" height="34" viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+      <line x1="7" y1="4"  x2="7"  y2="30" stroke="#EDF2F7" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="7" y1="17" x2="21" y2="4"  stroke="#EDF2F7" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="7" y1="17" x2="21" y2="30" stroke="#EDF2F7" stroke-width="2"   stroke-linecap="round"/>
+      <circle cx="7"  cy="4"  r="2.6" fill="#63B3ED"/>
+      <circle cx="7"  cy="17" r="2.6" fill="#63B3ED"/>
+      <circle cx="7"  cy="30" r="2.6" fill="#63B3ED"/>
+      <circle cx="21" cy="4"  r="2.6" fill="#63B3ED"/>
+      <circle cx="21" cy="30" r="2.6" fill="#63B3ED"/>
+    </svg>
+    <span class="nav-brand-name">Kaltrep</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="page-eyebrow">About</p>
+  <h1 class="page-name">Jeff Steele</h1>
+  <div class="page-rule">
+    <div class="page-rule-line"></div>
+    <div class="page-rule-dot"></div>
+    <div class="page-rule-line"></div>
+  </div>
+  <p class="page-title-line">Data Architect &amp; Analytics Leader &nbsp;&middot;&nbsp; Co-Founder, Kaltrep</p>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- PROFILE -->
+<div class="about-section">
+  <div class="profile-grid">
+
+    <div class="profile-photo-col reveal">
+      <img
+        src="images/jeff-steele.jpg"
+        alt="Jeff Steele"
+        class="profile-photo"
+      >
+      <p class="profile-photo-caption">Co-Founder &middot; Kaltrep Technical Consulting</p>
+    </div>
+
+    <div class="profile-bio-col">
+      <p class="section-label reveal">Background</p>
+
+      <p class="reveal reveal-delay-1">
+        I'm a data architect and analytics leader who came to the field through oil and gas engineering — not the other way around. I've <span class="bio-highlight">drilled wells, supervised completions field operations with 250+ personnel,</span> and built the operations schedules that drove billion-dollar CAPEX decisions. That operational context shapes every data system I design — I understand what the data represents because I've lived the operations behind it.
+      </p>
+
+      <p class="reveal reveal-delay-1">
+        At <span class="bio-highlight">EQT Corporation</span>, I spent nearly a decade as the senior data executive — not advising on Lakehouse architecture, but building it. Production Databricks Unity Catalog across a multi-catalog architecture, 260,000+ monthly pipeline integrations spanning 150+ internally developed APIs, a $3.1M analytics budget, and <span class="bio-highlight">a 35-person analytics organization built from zero.</span> I know what breaks at enterprise scale because I was the one fixing it.
+      </p>
+
+      <p class="reveal reveal-delay-2">
+        Before EQT, I served <span class="bio-highlight">21 years as a Marine officer</span> — managing a $414 million aviation parts inventory at 99.98% accuracy during a combat deployment, cutting material delivery times by 74% through pipeline analysis, and briefing senior leadership on operational status across global logistics. The analytical discipline and the leadership instincts developed in parallel. They still operate the same way.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- STATS -->
+<div class="about-section">
+  <p class="section-label reveal">By the Numbers</p>
+  <div class="stats-grid" style="margin-top: 1.5rem;">
+    <div class="stat-card reveal">
+      <span class="stat-num">260K+</span>
+      <span class="stat-label">Monthly integrations at peak</span>
+    </div>
+    <div class="stat-card reveal reveal-delay-1">
+      <span class="stat-num">40%</span>
+      <span class="stat-label">Pipeline cost reduction via Databricks optimization</span>
+    </div>
+    <div class="stat-card reveal reveal-delay-2">
+      <span class="stat-num">170+</span>
+      <span class="stat-label">Citizen developer program participants</span>
+    </div>
+    <div class="stat-card reveal reveal-delay-3">
+      <span class="stat-num">35</span>
+      <span class="stat-label">FTE analytics organization, built from zero</span>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- EXPERTISE -->
+<div class="about-section">
+  <p class="section-label reveal">Expertise</p>
+  <div class="expertise-groups reveal reveal-delay-1" style="margin-top: 1.5rem;">
+
+    <div class="expertise-group">
+      <div class="expertise-group-label">Platform</div>
+      <div class="tag-row">
+        <span class="tag">Databricks</span>
+        <span class="tag">Unity Catalog</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Azure Data Factory</span>
+        <span class="tag">Delta Lake</span>
+        <span class="tag">Posit Enterprise</span>
+      </div>
+    </div>
+
+    <div class="expertise-group">
+      <div class="expertise-group-label">Analytics</div>
+      <div class="tag-row">
+        <span class="tag">Power BI</span>
+        <span class="tag">Spotfire</span>
+        <span class="tag">Databricks Dashboards</span>
+        <span class="tag">Python</span>
+        <span class="tag">R / R Shiny</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="expertise-group">
+      <div class="expertise-group-label">Engineering</div>
+      <div class="tag-row">
+        <span class="tag">GitHub CI/CD</span>
+        <span class="tag">Data Governance</span>
+        <span class="tag">RBAC / Row-Level Security</span>
+        <span class="tag">API Integration</span>
+        <span class="tag">Lakehouse Architecture</span>
+      </div>
+    </div>
+
+    <div class="expertise-group">
+      <div class="expertise-group-label">Domain — Oil &amp; Gas</div>
+      <div class="tag-row">
+        <span class="tag">Upstream O&amp;G</span>
+        <span class="tag">Enverus</span>
+        <span class="tag">WellView</span>
+        <span class="tag">SCADA / Cygnet</span>
+        <span class="tag">GIS / Esri</span>
+        <span class="tag">Capital Programs</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- CTA -->
+<div class="about-section">
+  <div class="cta-card reveal">
+    <div class="cta-text">
+      <h3>Let's work together.</h3>
+      <p>If you're evaluating a data platform, planning an O&amp;G digital transformation, or need someone who can architect and build — not just advise — I'd welcome the conversation.</p>
+    </div>
+    <a href="https://www.linkedin.com/in/jeffreydsteele/" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <svg width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="5"  y1="3"  x2="5"  y2="23" stroke="#EDF2F7" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="5"  y1="13" x2="16" y2="3"  stroke="#EDF2F7" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="5"  y1="13" x2="16" y2="23" stroke="#EDF2F7" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="5"  cy="3"  r="2.2" fill="#63B3ED"/>
+      <circle cx="5"  cy="13" r="2.2" fill="#63B3ED"/>
+      <circle cx="5"  cy="23" r="2.2" fill="#63B3ED"/>
+      <circle cx="16" cy="3"  r="2.2" fill="#63B3ED"/>
+      <circle cx="16" cy="23" r="2.2" fill="#63B3ED"/>
+    </svg>
+    <span>Kaltrep</span>
+  </div>
+  <p>A Data Driven Investments Company &nbsp;&middot;&nbsp; &copy; 2026</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
