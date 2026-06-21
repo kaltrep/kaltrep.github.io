@@ -54,14 +54,28 @@ Full spec: `docs/kaltrep-brand-reference.html`
 Sections (top to bottom): Hero · Services · About Preview · Approach · Work · Contact
 Nav links: Services · About · Approach · Work · Contact
 
-**Services section:** Three cards
+**Services section:** Four cards in a 2×2 grid (`.services-grid` is `repeat(2, 1fr)`)
 - 01 · Data Platform Engineering
 - 02 · Analytics & Business Intelligence
-- 03 · Oil & Gas Operations
+- 03 · Artificial Intelligence
+- 04 · Oil & Gas Operations
+- Note: service-card copy actually uses "I" voice (not "we"), matched across all four cards.
 
 **About Preview:** Horizontal card between Services and Approach
 - Jeff's headshot (left), 2–3 sentence bio (right), "Learn more" link → about.html
 - Uses "I" voice
+
+**Work section:** Carousel (one project visible at a time)
+- `.case-track` holds N `.case-card.case-slide` blocks; only `.active` is shown.
+- Header has `.work-controls`: a dynamic `.work-industry` tag (#caseIndustry), a
+  "NN / total" counter (#caseCurrent), and prev/next `.work-arrow` buttons.
+- Each slide carries its industry in a `data-industry` attribute; JS at the bottom
+  of the file swaps slides, updates the counter, and rewrites the industry tag.
+- Adding a project: append a `.case-card.case-slide` with `data-industry`, bump the
+  counter denominator in the header. JS auto-detects slide count.
+- Current projects (4): Insurance Quote/Renewal (HubSpot) · Capital Program
+  Intelligence (anonymized energy client) · PropScout AI (real estate) ·
+  Geospatial Site Selection (QGIS energy siting). Uses "we" voice.
 
 ### about.html — Expanded bio page
 Sections: Page header · Narrative bio · Accomplishment stats (4-up) · Expertise tags · LinkedIn CTA
@@ -84,6 +98,11 @@ Sections: Page header · Narrative bio · Accomplishment stats (4-up) · Experti
   was DDI positioning, not Kaltrep's.
 - 2026-06-11: Added about.html and images/ directory. Moved from single-file to multi-file.
 - 2026-06-11: Established "we" (firm) / "I" (About) voice split.
+- 2026-06-20: Added Artificial Intelligence as a 4th Services pillar (position 03);
+  switched the services grid from 3 columns to 2×2.
+- 2026-06-20: Converted Recent Work from a single case study to an arrow-paged
+  carousel and added three projects (Capital Program Intelligence — anonymized,
+  PropScout AI, Geospatial Site Selection). Carousel keeps page height fixed.
 
 ## Change Protocol
 - **Content updates** (copy, stats, tags): proceed
