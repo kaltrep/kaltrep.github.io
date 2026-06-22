@@ -258,7 +258,7 @@ section {
 /* ── SERVICES ── */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   margin-top: 3.5rem;
   background: var(--border-sub);
@@ -564,6 +564,47 @@ section {
   padding: 0.35rem 0.85rem;
 }
 
+.work-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.work-nav { display: flex; align-items: center; gap: 0.75rem; }
+
+.work-counter {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  min-width: 52px;
+  text-align: center;
+}
+
+.work-counter .work-counter-current { color: var(--ice-light); }
+
+.work-arrow {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-sub);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+
+.work-arrow:hover { border-color: var(--ice); color: var(--ice); background: var(--ice-dim); }
+
+.case-slide { display: none; }
+.case-slide.active { display: block; animation: fadeIn 0.45s ease; }
+
 .case-card {
   background: var(--bg-card);
   border: 1px solid var(--border-sub);
@@ -829,7 +870,7 @@ footer {
 <section id="services">
   <p class="section-label reveal">What We Do</p>
   <h2 class="section-title reveal reveal-delay-1">Where engineering depth<br>meets domain expertise.</h2>
-  <p class="section-body reveal reveal-delay-2">We design and build data systems that actually ship — pipelines, Lakehouse architectures, analytics platforms, and the governance frameworks that make them last. Most of our work is in oil and gas, where we bring 18+ years of operational engineering context alongside the technical depth.</p>
+  <p class="section-body reveal reveal-delay-2">We design and build data systems that actually ship — pipelines, Lakehouse architectures, analytics platforms, AI systems, and the governance frameworks that make them last. Most of our work is in oil and gas, where we bring 18+ years of operational engineering context alongside the technical depth.</p>
   <div class="services-grid">
 
     <div class="service-card reveal reveal-delay-1">
@@ -860,6 +901,20 @@ footer {
 
     <div class="service-card reveal reveal-delay-3">
       <div class="service-number">03</div>
+      <h3 class="service-title">Artificial Intelligence</h3>
+      <p class="service-desc">I build AI that does the work — not demos that gather dust after the meeting. Agentic systems that run workflows end to end, foundation models hosted and fine-tuned on your own data, and custom MCP servers that wire them into the tools your team already uses — Databricks, Salesforce, Box. From chat interfaces to fully automated pipelines, every build is measured the same way: hours returned and faster decisions.</p>
+      <div class="service-tags">
+        <span class="tag">Agentic AI</span>
+        <span class="tag">LLM Fine-Tuning</span>
+        <span class="tag">Model Hosting</span>
+        <span class="tag">Custom MCPs</span>
+        <span class="tag">Chat Interfaces</span>
+        <span class="tag">AI Workflows</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-number">04</div>
       <h3 class="service-title">Oil &amp; Gas Operations</h3>
       <p class="service-desc">My O&amp;G background runs from the wellsite to the boardroom. Drilling Engineer. Completions Field Supervisor. Operations Planning Engineer. Then the architect of the digital systems that gave executive leadership real-time visibility into all of it. I've worked upstream from every angle, which means I scope problems correctly the first time — not after three discovery sessions.</p>
       <div class="service-tags">
@@ -931,53 +986,206 @@ footer {
       <p class="section-label reveal">Recent Work</p>
       <h2 class="section-title reveal reveal-delay-1">Delivering outcomes,<br>not just recommendations.</h2>
     </div>
-    <span class="work-industry reveal">Financial Services &nbsp;&middot;&nbsp; Insurance</span>
+    <div class="work-controls reveal">
+      <span class="work-industry" id="caseIndustry">Financial Services &nbsp;&middot;&nbsp; Insurance</span>
+      <div class="work-nav">
+        <button class="work-arrow" id="casePrev" type="button" aria-label="Previous project">&larr;</button>
+        <span class="work-counter"><span class="work-counter-current" id="caseCurrent">01</span> / 04</span>
+        <button class="work-arrow" id="caseNext" type="button" aria-label="Next project">&rarr;</button>
+      </div>
+    </div>
   </div>
 
-  <div class="case-card reveal">
-    <div class="case-top">
-      <h3 class="case-title">Automating the Insurance Quote &amp; Renewal Workflow</h3>
-      <p class="case-summary">An insurance broker managing 120+ clients was spending significant time per engagement manually wrangling data from multiple sources, filling out individual forms for each of 8 insurance carriers, and sending them via separate emails — before a single quote could even be returned. Renewal notices were tracked and sent by hand. We rebuilt the entire workflow inside HubSpot.</p>
+  <div class="case-track reveal">
+
+    <!-- PROJECT 1 -->
+    <div class="case-card case-slide active" data-industry="Financial Services &nbsp;&middot;&nbsp; Insurance">
+      <div class="case-top">
+        <h3 class="case-title">Automating the Insurance Quote &amp; Renewal Workflow</h3>
+        <p class="case-summary">An insurance broker managing 120+ clients was spending significant time per engagement manually wrangling data from multiple sources, filling out individual forms for each of 8 insurance carriers, and sending them via separate emails — before a single quote could even be returned. Renewal notices were tracked and sent by hand. We rebuilt the entire workflow inside HubSpot.</p>
+      </div>
+
+      <div class="case-columns">
+        <div class="case-col">
+          <p class="case-col-label">The Problem</p>
+          <p>Each quote required a broker to aggregate client data from disparate sources into a spreadsheet, then manually transcribe that data into a unique form for every insurance provider — attached to individual emails sent one by one. Renewal reminders were manually managed, creating risk of missed notices. Client engagement at events was tracked informally with no structured follow-up.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-col-label">The Solution</p>
+          <p>We implemented a full HubSpot CRM solution with custom event lead capture forms, automated post-event follow-up workflows, and a broker-facing quote intake form that simultaneously distributes to all 8 insurance providers via API integrations — eliminating redundant data entry entirely. A 30-day policy renewal automation was deployed to replace manual tracking, ensuring no client renewal goes unnoticed.</p>
+        </div>
+      </div>
+
+      <div class="case-results">
+        <div class="result-item">
+          <span class="result-num">120+</span>
+          <span class="result-label">Contacts Managed</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">8</span>
+          <span class="result-label">Carriers Integrated</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">100%</span>
+          <span class="result-label">Quote Submission Automated</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">0</span>
+          <span class="result-label">Manual Renewal Notices</span>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <span class="case-footer-label">Built with</span>
+        <span class="tag">HubSpot CRM</span>
+        <span class="tag">API Integration</span>
+        <span class="tag">Workflow Automation</span>
+        <span class="tag">Custom Forms</span>
+        <span class="tag">Event Lead Capture</span>
+      </div>
     </div>
 
-    <div class="case-columns">
-      <div class="case-col">
-        <p class="case-col-label">The Problem</p>
-        <p>Each quote required a broker to aggregate client data from disparate sources into a spreadsheet, then manually transcribe that data into a unique form for every insurance provider — attached to individual emails sent one by one. Renewal reminders were manually managed, creating risk of missed notices. Client engagement at events was tracked informally with no structured follow-up.</p>
+    <!-- PROJECT 2 -->
+    <div class="case-card case-slide" data-industry="Energy &nbsp;&middot;&nbsp; Capital Programs">
+      <div class="case-top">
+        <h3 class="case-title">Capital Program Intelligence for a Multi-Plant Energy Build</h3>
+        <p class="case-summary">A power-generation company executing a seven-plant capital build was tracking budget, commitments, work-in-progress, and actuals across systems that didn't talk to each other — ERP, project scheduling, work management, and engineering tools. Leadership had no single, trusted view of cost across the program. We designed a Databricks Lakehouse to serve as the single source of truth linking every dollar across all seven plants.</p>
       </div>
-      <div class="case-col">
-        <p class="case-col-label">The Solution</p>
-        <p>We implemented a full HubSpot CRM solution with custom event lead capture forms, automated post-event follow-up workflows, and a broker-facing quote intake form that simultaneously distributes to all 8 insurance providers via API integrations — eliminating redundant data entry entirely. A 30-day policy renewal automation was deployed to replace manual tracking, ensuring no client renewal goes unnoticed.</p>
+
+      <div class="case-columns">
+        <div class="case-col">
+          <p class="case-col-label">The Problem</p>
+          <p>Capital cost data lived in separate platforms — ERP for actuals, the CRM for purchase orders and contracts, scheduling tools for the WBS, and work-management and engineering systems for the rest. Numbers were re-keyed by hand between systems, reconciliations were slow, and executives couldn't see budget-versus-actual across the program without weeks of manual consolidation.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-col-label">The Solution</p>
+          <p>We architected a Databricks Lakehouse as the central hub — every system publishes to it and subscribes from it, with no application-to-application integrations permitted. A unified cost fact table joins budget, WIP, and actuals; a financial semantic layer standardizes metric definitions; and governed pipelines feed executive dashboards, accrual automation, and earned-value metrics (CPI, EAC, forecast variance). The same model scales across all seven plants.</p>
+        </div>
+      </div>
+
+      <div class="case-results">
+        <div class="result-item">
+          <span class="result-num">20&ndash;40%</span>
+          <span class="result-label">Cost Reduction Potential</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">7</span>
+          <span class="result-label">Plants, One Model</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">1</span>
+          <span class="result-label">Source of Truth</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">0</span>
+          <span class="result-label">App-to-App Integrations</span>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <span class="case-footer-label">Built with</span>
+        <span class="tag">Databricks Lakehouse</span>
+        <span class="tag">Azure Data Factory</span>
+        <span class="tag">Salesforce</span>
+        <span class="tag">NetSuite ERP</span>
+        <span class="tag">Earned Value Mgmt</span>
       </div>
     </div>
 
-    <div class="case-results">
-      <div class="result-item">
-        <span class="result-num">120+</span>
-        <span class="result-label">Contacts Managed</span>
+    <!-- PROJECT 3 -->
+    <div class="case-card case-slide" data-industry="Real Estate &nbsp;&middot;&nbsp; AI">
+      <div class="case-top">
+        <h3 class="case-title">PropScout AI &mdash; Real Estate Investment Intelligence</h3>
+        <p class="case-summary">Real estate investors waste hours manually pulling property data, estimating rents, and running the same return calculations one listing at a time. We built PropScout AI — an AI-assisted platform that screens properties against institutional-grade investment criteria automatically and hands the investor a ranked shortlist with the analysis already done.</p>
       </div>
-      <div class="result-item">
-        <span class="result-num">8</span>
-        <span class="result-label">Carriers Integrated</span>
+
+      <div class="case-columns">
+        <div class="case-col">
+          <p class="case-col-label">The Problem</p>
+          <p>Evaluating a rental property means gathering data from multiple sources, estimating rent, and computing cap rate, cash-on-cash, DSCR, and more — by hand, one property at a time. It's slow, inconsistent, and doesn't scale across markets, and scraping listing sites directly isn't a compliant option.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-col-label">The Solution</p>
+          <p>We designed a full-stack app that pulls licensed property and rent data through MCP-connected APIs, computes the five core investment metrics against user-controlled assumptions, and layers in AI enrichment — neighborhood scoring, short-term-rental demand, and risk flags. Results are ranked and one-click ready: each property generates a pre-filled deep link into the investor's analysis platform. Built end to end in Claude Code.</p>
+        </div>
       </div>
-      <div class="result-item">
-        <span class="result-num">100%</span>
-        <span class="result-label">Quote Submission Automated</span>
+
+      <div class="case-results">
+        <div class="result-item">
+          <span class="result-num">140M+</span>
+          <span class="result-label">Properties Covered</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">5</span>
+          <span class="result-label">Investment Metrics</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">17</span>
+          <span class="result-label">Tunable Assumptions</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">1-Click</span>
+          <span class="result-label">Deal Analysis</span>
+        </div>
       </div>
-      <div class="result-item">
-        <span class="result-num">0</span>
-        <span class="result-label">Manual Renewal Notices</span>
+
+      <div class="case-footer">
+        <span class="case-footer-label">Built with</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">React / FastAPI</span>
+        <span class="tag">RentCast + Apify MCPs</span>
+        <span class="tag">Google Cloud</span>
+        <span class="tag">Gemini</span>
       </div>
     </div>
 
-    <div class="case-footer">
-      <span class="case-footer-label">Built with</span>
-      <span class="tag">HubSpot CRM</span>
-      <span class="tag">API Integration</span>
-      <span class="tag">Workflow Automation</span>
-      <span class="tag">Custom Forms</span>
-      <span class="tag">Event Lead Capture</span>
+    <!-- PROJECT 4 -->
+    <div class="case-card case-slide" data-industry="Energy &nbsp;&middot;&nbsp; Site Selection">
+      <div class="case-top">
+        <h3 class="case-title">Geospatial Site Selection for Energy Development</h3>
+        <p class="case-summary">Choosing where to build an energy project means weighing dozens of competing factors across the landscape — terrain, sun exposure, proximity to infrastructure, grid tie-in cost, and more. We built a GIS-based analysis system that scores every candidate parcel against a proprietary model and surfaces the optimal locations automatically, replacing weeks of manual map review.</p>
+      </div>
+
+      <div class="case-columns">
+        <div class="case-col">
+          <p class="case-col-label">The Problem</p>
+          <p>Site selection was a slow, manual process — analysts layering maps by hand, eyeballing slope and utility data, and estimating grid distances parcel by parcel. The work was subjective, hard to repeat, and didn't scale across a region. Comparing thousands of potential plots across multiple states on a consistent, defensible basis was effectively impossible.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-col-label">The Solution</p>
+          <p>We built an automated siting engine in QGIS that ingests slope maps, utility and infrastructure layers, solar exposure, population density, and grid tie-in cost, then applies a proprietary weighted scoring model to rank every candidate parcel. The output is a ranked shortlist of optimal plots with the trade-offs made explicit — turning a manual, subjective exercise into a repeatable, data-driven one.</p>
+        </div>
+      </div>
+
+      <div class="case-results">
+        <div class="result-item">
+          <span class="result-num">1000+</span>
+          <span class="result-label">Locations Scanned</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">3</span>
+          <span class="result-label">States Analyzed</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">12</span>
+          <span class="result-label">Counties Covered</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">6+</span>
+          <span class="result-label">Map Layers Weighted</span>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <span class="case-footer-label">Built with</span>
+        <span class="tag">QGIS</span>
+        <span class="tag">Geospatial Analysis</span>
+        <span class="tag">Slope &amp; Terrain Modeling</span>
+        <span class="tag">Grid Tie-In Analysis</span>
+        <span class="tag">Proprietary Scoring Model</span>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1021,6 +1229,27 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Work / case-study carousel
+(function () {
+  const slides = document.querySelectorAll('.case-slide');
+  if (slides.length < 2) return;
+  const total = slides.length;
+  const industryEl = document.getElementById('caseIndustry');
+  const currentEl = document.getElementById('caseCurrent');
+  let idx = 0;
+
+  function show(i) {
+    idx = (i + total) % total;
+    slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+    industryEl.textContent = slides[idx].dataset.industry;
+    currentEl.textContent = String(idx + 1).padStart(2, '0');
+  }
+
+  document.getElementById('casePrev').addEventListener('click', () => show(idx - 1));
+  document.getElementById('caseNext').addEventListener('click', () => show(idx + 1));
+  show(0);
+})();
 </script>
 
 </body>
